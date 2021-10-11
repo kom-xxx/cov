@@ -1,0 +1,1208 @@
+
+========================================================================
+
+** ELF Header Information
+
+    File Name: calculator-aarch32.elf
+
+    Machine class: ELFCLASS32 (32-bit)
+    Data encoding: ELFDATA2LSB (Little endian)
+    Header version: EV_CURRENT (Current version)
+    Operating System ABI: none
+    ABI Version: 0
+    File Type: ET_EXEC (Executable) (2)
+    Machine: EM_ARM (ARM)
+
+    Image Entry point: 0x00020150
+    Flags: EF_ARM_ABI_FLOAT_HARD (0x05000400)
+
+    ARM ELF revision: 5 (ABI version 2)
+
+    Conforms to Hard float procedure-call standard
+
+    Header size: 52 bytes (0x34)
+    Program header entry size: 32 bytes (0x20)
+    Section header entry size: 40 bytes (0x28)
+
+    Program header entries: 5
+    Section header entries: 9
+
+    Program header offset: 52 (0x00000034)
+    Section header offset: 6484 (0x00001954)
+
+    Section header string table index: 7
+
+========================================================================
+
+** Program header #0 (PT_PHDR) [PF_R]
+    Size : 160 bytes
+    Virtual address: 0x00010034 (Alignment 4)
+
+
+====================================
+
+** Program header #1 (PT_LOAD) [PF_R]
+    Size : 336 bytes
+    Virtual address: 0x00010000 (Alignment 65536)
+
+
+====================================
+
+** Program header #2 (PT_LOAD) [PF_X + PF_R]
+    Size : 4164 bytes
+    Virtual address: 0x00020150 (Alignment 65536)
+
+
+====================================
+
+** Program header #3 (PT_GNU_STACK) [PF_W + PF_R]
+    Size : 0 bytes
+    Virtual address: 0x00000000
+
+
+====================================
+
+** Program header #4 (PT_ARM_EXIDX) [PF_R]
+    Size : 16 bytes
+    Virtual address: 0x000100d4 (Alignment 4)
+
+
+========================================================================
+
+** Section #1 '.ARM.exidx' (SHT_ARM_EXIDX) [SHF_ALLOC + SHF_LINK_ORDER]
+    Size   : 16 bytes (alignment 4)
+    Address: 0x000100d4
+    Link to section #3 '.text'
+
+
+** Section #2 '.rodata' (SHT_PROGBITS) [SHF_ALLOC + SHF_MERGE + SHF_STRINGS]
+    Size   : 108 bytes
+    Address: 0x000100e4
+
+
+** Section #3 '.text' (SHT_PROGBITS) [SHF_ALLOC + SHF_EXECINSTR]
+    Size   : 4164 bytes (alignment 4)
+    Address: 0x00020150
+
+    $a.0
+    _start
+        0x00020150:    e3a00601    ....    MOV      r0,#0x100000
+        0x00020154:    e1a0d000    ....    MOV      sp,r0
+        0x00020158:    eb0000e4    ....    BL       c_entry ; 0x204f0
+    $a.0
+    sys_clock
+        0x0002015c:    e3a00010    ....    MOV      r0,#0x10
+        0x00020160:    ef123456    V4..    SVC      #0x123456 ; formerly SWI
+        0x00020164:    e12fff1e    ../.    BX       lr
+    sys_close
+        0x00020168:    e24dd004    ..M.    SUB      sp,sp,#4
+        0x0002016c:    e58d0000    ....    STR      r0,[sp,#0]
+        0x00020170:    e3a00002    ....    MOV      r0,#2
+        0x00020174:    e1a0100d    ....    MOV      r1,sp
+        0x00020178:    ef123456    V4..    SVC      #0x123456 ; formerly SWI
+        0x0002017c:    e28dd004    ....    ADD      sp,sp,#4
+        0x00020180:    e12fff1e    ../.    BX       lr
+    sys_elapsed
+        0x00020184:    e92d4830    0H-.    PUSH     {r4,r5,r11,lr}
+        0x00020188:    e28db008    ....    ADD      r11,sp,#8
+        0x0002018c:    e24dd008    ..M.    SUB      sp,sp,#8
+        0x00020190:    e1a02000    . ..    MOV      r2,r0
+        0x00020194:    e3a00030    0...    MOV      r0,#0x30
+        0x00020198:    e1a0100d    ....    MOV      r1,sp
+        0x0002019c:    ef123456    V4..    SVC      #0x123456 ; formerly SWI
+        0x000201a0:    e3500000    ..P.    CMP      r0,#0
+        0x000201a4:    e16f0f10    ..o.    CLZ      r0,r0
+        0x000201a8:    089d0030    0...    LDMEQ    sp,{r4,r5}
+        0x000201ac:    01c240f0    .@..    STRDEQ   r4,r5,[r2,#0]
+        0x000201b0:    e1a002a0    ....    LSR      r0,r0,#5
+        0x000201b4:    e24bd008    ..K.    SUB      sp,r11,#8
+        0x000201b8:    e8bd8830    0...    POP      {r4,r5,r11,pc}
+    sys_errno
+        0x000201bc:    e3a00013    ....    MOV      r0,#0x13
+        0x000201c0:    ef123456    V4..    SVC      #0x123456 ; formerly SWI
+        0x000201c4:    e12fff1e    ../.    BX       lr
+    sys_exit
+        0x000201c8:    e3001026    &...    MOVW     r1,#0x26
+        0x000201cc:    e3a00018    ....    MOV      r0,#0x18
+        0x000201d0:    e3401002    ..@.    MOVT     r1,#2
+        0x000201d4:    ef123456    V4..    SVC      #0x123456 ; formerly SWI
+        0x000201d8:    e12fff1e    ../.    BX       lr
+    sys_exit_extended
+        0x000201dc:    e24dd008    ..M.    SUB      sp,sp,#8
+        0x000201e0:    e58d0004    ....    STR      r0,[sp,#4]
+        0x000201e4:    e3000026    &...    MOVW     r0,#0x26
+        0x000201e8:    e3400002    ..@.    MOVT     r0,#2
+        0x000201ec:    e1a0100d    ....    MOV      r1,sp
+        0x000201f0:    e58d0000    ....    STR      r0,[sp,#0]
+        0x000201f4:    e3a00020     ...    MOV      r0,#0x20
+        0x000201f8:    ef123456    V4..    SVC      #0x123456 ; formerly SWI
+        0x000201fc:    e28dd008    ....    ADD      sp,sp,#8
+        0x00020200:    e12fff1e    ../.    BX       lr
+    sys_flen
+        0x00020204:    e24dd004    ..M.    SUB      sp,sp,#4
+        0x00020208:    e58d0000    ....    STR      r0,[sp,#0]
+        0x0002020c:    e3a0000c    ....    MOV      r0,#0xc
+        0x00020210:    e1a0100d    ....    MOV      r1,sp
+        0x00020214:    ef123456    V4..    SVC      #0x123456 ; formerly SWI
+        0x00020218:    e28dd004    ....    ADD      sp,sp,#4
+        0x0002021c:    e12fff1e    ../.    BX       lr
+    sys_get_cmdline
+        0x00020220:    e24dd008    ..M.    SUB      sp,sp,#8
+        0x00020224:    e88d0003    ....    STM      sp,{r0,r1}
+        0x00020228:    e1a0100d    ....    MOV      r1,sp
+        0x0002022c:    e3a00015    ....    MOV      r0,#0x15
+        0x00020230:    ef123456    V4..    SVC      #0x123456 ; formerly SWI
+        0x00020234:    e59d1000    ....    LDR      r1,[sp,#0]
+        0x00020238:    e3500000    ..P.    CMP      r0,#0
+        0x0002023c:    13a01000    ....    MOVNE    r1,#0
+        0x00020240:    e1a00001    ....    MOV      r0,r1
+        0x00020244:    e28dd008    ....    ADD      sp,sp,#8
+        0x00020248:    e12fff1e    ../.    BX       lr
+    sys_heapinfo
+        0x0002024c:    e24dd004    ..M.    SUB      sp,sp,#4
+        0x00020250:    e58d0000    ....    STR      r0,[sp,#0]
+        0x00020254:    e3a00016    ....    MOV      r0,#0x16
+        0x00020258:    e1a0100d    ....    MOV      r1,sp
+        0x0002025c:    ef123456    V4..    SVC      #0x123456 ; formerly SWI
+        0x00020260:    e28dd004    ....    ADD      sp,sp,#4
+        0x00020264:    e12fff1e    ../.    BX       lr
+    sys_iserror
+        0x00020268:    e24dd004    ..M.    SUB      sp,sp,#4
+        0x0002026c:    e58d0000    ....    STR      r0,[sp,#0]
+        0x00020270:    e3a00008    ....    MOV      r0,#8
+        0x00020274:    e1a0100d    ....    MOV      r1,sp
+        0x00020278:    ef123456    V4..    SVC      #0x123456 ; formerly SWI
+        0x0002027c:    e3500000    ..P.    CMP      r0,#0
+        0x00020280:    13000001    ....    MOVWNE   r0,#1
+        0x00020284:    e28dd004    ....    ADD      sp,sp,#4
+        0x00020288:    e12fff1e    ../.    BX       lr
+    sys_istty
+        0x0002028c:    e24dd004    ..M.    SUB      sp,sp,#4
+        0x00020290:    e58d0000    ....    STR      r0,[sp,#0]
+        0x00020294:    e3a00009    ....    MOV      r0,#9
+        0x00020298:    e1a0100d    ....    MOV      r1,sp
+        0x0002029c:    ef123456    V4..    SVC      #0x123456 ; formerly SWI
+        0x000202a0:    e3500001    ..P.    CMP      r0,#1
+        0x000202a4:    83e00000    ....    MVNHI    r0,#0
+        0x000202a8:    e28dd004    ....    ADD      sp,sp,#4
+        0x000202ac:    e12fff1e    ../.    BX       lr
+    sys_open
+        0x000202b0:    e24dd00c    ..M.    SUB      sp,sp,#0xc
+        0x000202b4:    e88d0003    ....    STM      sp,{r0,r1}
+        0x000202b8:    e5d01000    ....    LDRB     r1,[r0,#0]
+        0x000202bc:    e3510000    ..Q.    CMP      r1,#0
+        0x000202c0:    0a000006    ....    BEQ      0x202e0 ; sys_open + 48
+        0x000202c4:    e2801001    ....    ADD      r1,r0,#1
+        0x000202c8:    e3a00000    ....    MOV      r0,#0
+        0x000202cc:    e7d12000    . ..    LDRB     r2,[r1,r0]
+        0x000202d0:    e2800001    ....    ADD      r0,r0,#1
+        0x000202d4:    e3520000    ..R.    CMP      r2,#0
+        0x000202d8:    1afffffb    ....    BNE      0x202cc ; sys_open + 28
+        0x000202dc:    ea000000    ....    B        0x202e4 ; sys_open + 52
+        0x000202e0:    e3a00000    ....    MOV      r0,#0
+        0x000202e4:    e58d0008    ....    STR      r0,[sp,#8]
+        0x000202e8:    e3a00001    ....    MOV      r0,#1
+        0x000202ec:    e1a0100d    ....    MOV      r1,sp
+        0x000202f0:    ef123456    V4..    SVC      #0x123456 ; formerly SWI
+        0x000202f4:    e28dd00c    ....    ADD      sp,sp,#0xc
+        0x000202f8:    e12fff1e    ../.    BX       lr
+    sys_read
+        0x000202fc:    e24dd00c    ..M.    SUB      sp,sp,#0xc
+        0x00020300:    e88d0007    ....    STM      sp,{r0-r2}
+        0x00020304:    e3a00006    ....    MOV      r0,#6
+        0x00020308:    e1a0100d    ....    MOV      r1,sp
+        0x0002030c:    ef123456    V4..    SVC      #0x123456 ; formerly SWI
+        0x00020310:    e28dd00c    ....    ADD      sp,sp,#0xc
+        0x00020314:    e12fff1e    ../.    BX       lr
+    sys_readc
+        0x00020318:    e3a00007    ....    MOV      r0,#7
+        0x0002031c:    ef123456    V4..    SVC      #0x123456 ; formerly SWI
+        0x00020320:    e6ef0070    p...    UXTB     r0,r0
+        0x00020324:    e12fff1e    ../.    BX       lr
+    sys_remove
+        0x00020328:    e24dd008    ..M.    SUB      sp,sp,#8
+        0x0002032c:    e5d01000    ....    LDRB     r1,[r0,#0]
+        0x00020330:    e58d0000    ....    STR      r0,[sp,#0]
+        0x00020334:    e3510000    ..Q.    CMP      r1,#0
+        0x00020338:    0a000006    ....    BEQ      0x20358 ; sys_remove + 48
+        0x0002033c:    e2801001    ....    ADD      r1,r0,#1
+        0x00020340:    e3a00000    ....    MOV      r0,#0
+        0x00020344:    e7d12000    . ..    LDRB     r2,[r1,r0]
+        0x00020348:    e2800001    ....    ADD      r0,r0,#1
+        0x0002034c:    e3520000    ..R.    CMP      r2,#0
+        0x00020350:    1afffffb    ....    BNE      0x20344 ; sys_remove + 28
+        0x00020354:    ea000000    ....    B        0x2035c ; sys_remove + 52
+        0x00020358:    e3a00000    ....    MOV      r0,#0
+        0x0002035c:    e58d0004    ....    STR      r0,[sp,#4]
+        0x00020360:    e3a0000e    ....    MOV      r0,#0xe
+        0x00020364:    e1a0100d    ....    MOV      r1,sp
+        0x00020368:    ef123456    V4..    SVC      #0x123456 ; formerly SWI
+        0x0002036c:    e28dd008    ....    ADD      sp,sp,#8
+        0x00020370:    e12fff1e    ../.    BX       lr
+    sys_rename
+        0x00020374:    e24dd010    ..M.    SUB      sp,sp,#0x10
+        0x00020378:    e5d03000    .0..    LDRB     r3,[r0,#0]
+        0x0002037c:    e3a02000    . ..    MOV      r2,#0
+        0x00020380:    e58d0000    ....    STR      r0,[sp,#0]
+        0x00020384:    e3530000    ..S.    CMP      r3,#0
+        0x00020388:    e3a03000    .0..    MOV      r3,#0
+        0x0002038c:    0a000005    ....    BEQ      0x203a8 ; sys_rename + 52
+        0x00020390:    e280c001    ....    ADD      r12,r0,#1
+        0x00020394:    e3a03000    .0..    MOV      r3,#0
+        0x00020398:    e7dc0003    ....    LDRB     r0,[r12,r3]
+        0x0002039c:    e2833001    .0..    ADD      r3,r3,#1
+        0x000203a0:    e3500000    ..P.    CMP      r0,#0
+        0x000203a4:    1afffffb    ....    BNE      0x20398 ; sys_rename + 36
+        0x000203a8:    e5d10000    ....    LDRB     r0,[r1,#0]
+        0x000203ac:    e58d1008    ....    STR      r1,[sp,#8]
+        0x000203b0:    e3500000    ..P.    CMP      r0,#0
+        0x000203b4:    e58d3004    .0..    STR      r3,[sp,#4]
+        0x000203b8:    0a000005    ....    BEQ      0x203d4 ; sys_rename + 96
+        0x000203bc:    e2810001    ....    ADD      r0,r1,#1
+        0x000203c0:    e3a02000    . ..    MOV      r2,#0
+        0x000203c4:    e7d01002    ....    LDRB     r1,[r0,r2]
+        0x000203c8:    e2822001    . ..    ADD      r2,r2,#1
+        0x000203cc:    e3510000    ..Q.    CMP      r1,#0
+        0x000203d0:    1afffffb    ....    BNE      0x203c4 ; sys_rename + 80
+        0x000203d4:    e3a0000f    ....    MOV      r0,#0xf
+        0x000203d8:    e58d200c    . ..    STR      r2,[sp,#0xc]
+        0x000203dc:    e1a0100d    ....    MOV      r1,sp
+        0x000203e0:    ef123456    V4..    SVC      #0x123456 ; formerly SWI
+        0x000203e4:    e28dd010    ....    ADD      sp,sp,#0x10
+        0x000203e8:    e12fff1e    ../.    BX       lr
+    sys_seek
+        0x000203ec:    e24dd008    ..M.    SUB      sp,sp,#8
+        0x000203f0:    e88d0003    ....    STM      sp,{r0,r1}
+        0x000203f4:    e3a0000a    ....    MOV      r0,#0xa
+        0x000203f8:    e1a0100d    ....    MOV      r1,sp
+        0x000203fc:    ef123456    V4..    SVC      #0x123456 ; formerly SWI
+        0x00020400:    e16f0f10    ..o.    CLZ      r0,r0
+        0x00020404:    e1a002a0    ....    LSR      r0,r0,#5
+        0x00020408:    e28dd008    ....    ADD      sp,sp,#8
+        0x0002040c:    e12fff1e    ../.    BX       lr
+    sys_system
+        0x00020410:    e24dd008    ..M.    SUB      sp,sp,#8
+        0x00020414:    e5d01000    ....    LDRB     r1,[r0,#0]
+        0x00020418:    e58d0000    ....    STR      r0,[sp,#0]
+        0x0002041c:    e3510000    ..Q.    CMP      r1,#0
+        0x00020420:    0a000006    ....    BEQ      0x20440 ; sys_system + 48
+        0x00020424:    e2801001    ....    ADD      r1,r0,#1
+        0x00020428:    e3a00000    ....    MOV      r0,#0
+        0x0002042c:    e7d12000    . ..    LDRB     r2,[r1,r0]
+        0x00020430:    e2800001    ....    ADD      r0,r0,#1
+        0x00020434:    e3520000    ..R.    CMP      r2,#0
+        0x00020438:    1afffffb    ....    BNE      0x2042c ; sys_system + 28
+        0x0002043c:    ea000000    ....    B        0x20444 ; sys_system + 52
+        0x00020440:    e3a00000    ....    MOV      r0,#0
+        0x00020444:    e58d0004    ....    STR      r0,[sp,#4]
+        0x00020448:    e3a00012    ....    MOV      r0,#0x12
+        0x0002044c:    e1a0100d    ....    MOV      r1,sp
+        0x00020450:    ef123456    V4..    SVC      #0x123456 ; formerly SWI
+        0x00020454:    e28dd008    ....    ADD      sp,sp,#8
+        0x00020458:    e12fff1e    ../.    BX       lr
+    sys_tickfreq
+        0x0002045c:    e3a00031    1...    MOV      r0,#0x31
+        0x00020460:    e3a01000    ....    MOV      r1,#0
+        0x00020464:    ef123456    V4..    SVC      #0x123456 ; formerly SWI
+        0x00020468:    e12fff1e    ../.    BX       lr
+    sys_time
+        0x0002046c:    e3a00011    ....    MOV      r0,#0x11
+        0x00020470:    ef123456    V4..    SVC      #0x123456 ; formerly SWI
+        0x00020474:    e12fff1e    ../.    BX       lr
+    sys_tmpnam
+        0x00020478:    e24dd00c    ..M.    SUB      sp,sp,#0xc
+        0x0002047c:    e98d0005    ....    STMIB    sp,{r0,r2}
+        0x00020480:    e3a0000d    ....    MOV      r0,#0xd
+        0x00020484:    e1a03001    .0..    MOV      r3,r1
+        0x00020488:    e58d1000    ....    STR      r1,[sp,#0]
+        0x0002048c:    e1a0100d    ....    MOV      r1,sp
+        0x00020490:    ef123456    V4..    SVC      #0x123456 ; formerly SWI
+        0x00020494:    e3500000    ..P.    CMP      r0,#0
+        0x00020498:    13a03000    .0..    MOVNE    r3,#0
+        0x0002049c:    e1a00003    ....    MOV      r0,r3
+        0x000204a0:    e28dd00c    ....    ADD      sp,sp,#0xc
+        0x000204a4:    e12fff1e    ../.    BX       lr
+    sys_write
+        0x000204a8:    e24dd00c    ..M.    SUB      sp,sp,#0xc
+        0x000204ac:    e88d0007    ....    STM      sp,{r0-r2}
+        0x000204b0:    e3a00005    ....    MOV      r0,#5
+        0x000204b4:    e1a0100d    ....    MOV      r1,sp
+        0x000204b8:    ef123456    V4..    SVC      #0x123456 ; formerly SWI
+        0x000204bc:    e28dd00c    ....    ADD      sp,sp,#0xc
+        0x000204c0:    e12fff1e    ../.    BX       lr
+    sys_writec
+        0x000204c4:    e24dd004    ..M.    SUB      sp,sp,#4
+        0x000204c8:    e5cd0003    ....    STRB     r0,[sp,#3]
+        0x000204cc:    e3a00003    ....    MOV      r0,#3
+        0x000204d0:    e28d1003    ....    ADD      r1,sp,#3
+        0x000204d4:    ef123456    V4..    SVC      #0x123456 ; formerly SWI
+        0x000204d8:    e28dd004    ....    ADD      sp,sp,#4
+        0x000204dc:    e12fff1e    ../.    BX       lr
+    sys_write0
+        0x000204e0:    e1a01000    ....    MOV      r1,r0
+        0x000204e4:    e3a00004    ....    MOV      r0,#4
+        0x000204e8:    ef123456    V4..    SVC      #0x123456 ; formerly SWI
+        0x000204ec:    e12fff1e    ../.    BX       lr
+    $a.0
+    c_entry
+        0x000204f0:    e92d4830    0H-.    PUSH     {r4,r5,r11,lr}
+        0x000204f4:    e28db008    ....    ADD      r11,sp,#8
+        0x000204f8:    e24dd038    8.M.    SUB      sp,sp,#0x38
+        0x000204fc:    e24ddb01    ..M.    SUB      sp,sp,#0x400
+        0x00020500:    e300012b    +...    MOV      r0,#0x12b
+        0x00020504:    e3400001    ..@.    MOVT     r0,#1
+        0x00020508:    e3a01000    ....    MOV      r1,#0
+        0x0002050c:    ebffff67    g...    BL       sys_open ; 0x202b0
+        0x00020510:    e50b000c    ....    STR      r0,[r11,#-0xc]
+        0x00020514:    e51b100c    ....    LDR      r1,[r11,#-0xc]
+        0x00020518:    e28d0024    $...    ADD      r0,sp,#0x24
+        0x0002051c:    e58d0000    ....    STR      r0,[sp,#0]
+        0x00020520:    eb000030    0...    BL       _ZN10FileReaderC2Ej ; 0x205e8
+        0x00020524:    e59d1000    ....    LDR      r1,[sp,#0]
+        0x00020528:    e28d0010    ....    ADD      r0,sp,#0x10
+        0x0002052c:    e58d0004    ....    STR      r0,[sp,#4]
+        0x00020530:    eb000038    8...    BL       _ZN5LexerC2ER10FileReader ; 0x20618
+        0x00020534:    e59d1004    ....    LDR      r1,[sp,#4]
+        0x00020538:    e28d0008    ....    ADD      r0,sp,#8
+        0x0002053c:    eb00003f    ?...    BL       _ZN6ParserC2ER5Lexer ; 0x20640
+        0x00020540:    eaffffff    ....    B        0x20544 ; c_entry + 84
+        0x00020544:    e59d001c    ....    LDR      r0,[sp,#0x1c]
+        0x00020548:    e3500c01    ..P.    CMP      r0,#0x100
+        0x0002054c:    0a000003    ....    BEQ      0x20560 ; c_entry + 112
+        0x00020550:    eaffffff    ....    B        0x20554 ; c_entry + 100
+        0x00020554:    e28d0008    ....    ADD      r0,sp,#8
+        0x00020558:    eb000046    F...    BL       _ZN6Parser9try_parseEv ; 0x20678
+        0x0002055c:    eafffff8    ....    B        0x20544 ; c_entry + 84
+        0x00020560:    e3a00000    ....    MOV      r0,#0
+        0x00020564:    ebffff17    ....    BL       sys_exit ; 0x201c8
+        0x00020568:    e24bd008    ..K.    SUB      sp,r11,#8
+        0x0002056c:    e8bd8830    0...    POP      {r4,r5,r11,pc}
+    _ZL5printj
+        0x00020570:    e92d4800    .H-.    PUSH     {r11,lr}
+        0x00020574:    e1a0b00d    ....    MOV      r11,sp
+        0x00020578:    e24dd008    ..M.    SUB      sp,sp,#8
+        0x0002057c:    e58d0004    ....    STR      r0,[sp,#4]
+        0x00020580:    e3000106    ....    MOVW     r0,#0x106
+        0x00020584:    e3400001    ..@.    MOVT     r0,#1
+        0x00020588:    ebffffd4    ....    BL       sys_write0 ; 0x204e0
+        0x0002058c:    e3a00008    ....    MOV      r0,#8
+        0x00020590:    e58d0000    ....    STR      r0,[sp,#0]
+        0x00020594:    eaffffff    ....    B        0x20598 ; _ZL5printj + 40
+        0x00020598:    e59d0000    ....    LDR      r0,[sp,#0]
+        0x0002059c:    e2401001    ..@.    SUB      r1,r0,#1
+        0x000205a0:    e58d1000    ....    STR      r1,[sp,#0]
+        0x000205a4:    e3500000    ..P.    CMP      r0,#0
+        0x000205a8:    0a00000a    ....    BEQ      0x205d8 ; _ZL5printj + 104
+        0x000205ac:    eaffffff    ....    B        0x205b0 ; _ZL5printj + 64
+        0x000205b0:    e59d1004    ....    LDR      r1,[sp,#4]
+        0x000205b4:    e59d0000    ....    LDR      r0,[sp,#0]
+        0x000205b8:    e1a02100    .!..    LSL      r2,r0,#2
+        0x000205bc:    e3a0000f    ....    MOV      r0,#0xf
+        0x000205c0:    e0001231    1...    AND      r1,r0,r1,LSR r2
+        0x000205c4:    e300011a    ....    MOVW     r0,#0x11a
+        0x000205c8:    e3400001    ..@.    MOVT     r0,#1
+        0x000205cc:    e7d00001    ....    LDRB     r0,[r0,r1]
+        0x000205d0:    ebffffbb    ....    BL       sys_writec ; 0x204c4
+        0x000205d4:    eaffffef    ....    B        0x20598 ; _ZL5printj + 40
+        0x000205d8:    e3a0000a    ....    MOV      r0,#0xa
+        0x000205dc:    ebffffb8    ....    BL       sys_writec ; 0x204c4
+        0x000205e0:    e1a0d00b    ....    MOV      sp,r11
+        0x000205e4:    e8bd8800    ....    POP      {r11,pc}
+    $a.1
+    _ZN10FileReaderC2Ej
+        0x000205e8:    e24dd008    ..M.    SUB      sp,sp,#8
+        0x000205ec:    e58d0004    ....    STR      r0,[sp,#4]
+        0x000205f0:    e58d1000    ....    STR      r1,[sp,#0]
+        0x000205f4:    e59d0004    ....    LDR      r0,[sp,#4]
+        0x000205f8:    e59d1000    ....    LDR      r1,[sp,#0]
+        0x000205fc:    e5801000    ....    STR      r1,[r0,#0]
+        0x00020600:    e3a01000    ....    MOV      r1,#0
+        0x00020604:    e5801404    ....    STR      r1,[r0,#0x404]
+        0x00020608:    e5801408    ....    STR      r1,[r0,#0x408]
+        0x0002060c:    e5c0140c    ....    STRB     r1,[r0,#0x40c]
+        0x00020610:    e28dd008    ....    ADD      sp,sp,#8
+        0x00020614:    e12fff1e    ../.    BX       lr
+    $a.2
+    _ZN5LexerC2ER10FileReader
+        0x00020618:    e24dd008    ..M.    SUB      sp,sp,#8
+        0x0002061c:    e58d0004    ....    STR      r0,[sp,#4]
+        0x00020620:    e58d1000    ....    STR      r1,[sp,#0]
+        0x00020624:    e59d0004    ....    LDR      r0,[sp,#4]
+        0x00020628:    e59d1000    ....    LDR      r1,[sp,#0]
+        0x0002062c:    e5801000    ....    STR      r1,[r0,#0]
+        0x00020630:    e3a01000    ....    MOV      r1,#0
+        0x00020634:    e5c01008    ....    STRB     r1,[r0,#8]
+        0x00020638:    e28dd008    ....    ADD      sp,sp,#8
+        0x0002063c:    e12fff1e    ../.    BX       lr
+    $a.3
+    _ZN6ParserC2ER5Lexer
+        0x00020640:    e92d4800    .H-.    PUSH     {r11,lr}
+        0x00020644:    e1a0b00d    ....    MOV      r11,sp
+        0x00020648:    e24dd010    ..M.    SUB      sp,sp,#0x10
+        0x0002064c:    e50b0004    ....    STR      r0,[r11,#-4]
+        0x00020650:    e58d1008    ....    STR      r1,[sp,#8]
+        0x00020654:    e51b1004    ....    LDR      r1,[r11,#-4]
+        0x00020658:    e58d1004    ....    STR      r1,[sp,#4]
+        0x0002065c:    e59d0008    ....    LDR      r0,[sp,#8]
+        0x00020660:    e5810000    ....    STR      r0,[r1,#0]
+        0x00020664:    e59d0008    ....    LDR      r0,[sp,#8]
+        0x00020668:    eb00003d    =...    BL       _ZN5Lexer4nextEv ; 0x20764
+        0x0002066c:    e59d0004    ....    LDR      r0,[sp,#4]
+        0x00020670:    e1a0d00b    ....    MOV      sp,r11
+        0x00020674:    e8bd8800    ....    POP      {r11,pc}
+    $a.4
+    _ZN6Parser9try_parseEv
+        0x00020678:    e92d4800    .H-.    PUSH     {r11,lr}
+        0x0002067c:    e1a0b00d    ....    MOV      r11,sp
+        0x00020680:    e24dd010    ..M.    SUB      sp,sp,#0x10
+        0x00020684:    e50b0004    ....    STR      r0,[r11,#-4]
+        0x00020688:    e51b0004    ....    LDR      r0,[r11,#-4]
+        0x0002068c:    e58d0004    ....    STR      r0,[sp,#4]
+        0x00020690:    e28d1008    ....    ADD      r1,sp,#8
+        0x00020694:    eb000171    q...    BL       _ZN6Parser4exprERj ; 0x20c60
+        0x00020698:    e3500000    ..P.    CMP      r0,#0
+        0x0002069c:    0a000006    ....    BEQ      0x206bc ; _ZN6Parser9try_parseEv + 68
+        0x000206a0:    eaffffff    ....    B        0x206a4 ; _ZN6Parser9try_parseEv + 44
+        0x000206a4:    e59d0008    ....    LDR      r0,[sp,#8]
+        0x000206a8:    ebffffb0    ....    BL       _ZL5printj ; 0x20570
+        0x000206ac:    e59d0004    ....    LDR      r0,[sp,#4]
+        0x000206b0:    e5900000    ....    LDR      r0,[r0,#0]
+        0x000206b4:    eb00002a    *...    BL       _ZN5Lexer4nextEv ; 0x20764
+        0x000206b8:    ea000027    '...    B        0x2075c ; _ZN6Parser9try_parseEv + 228
+        0x000206bc:    e59d0004    ....    LDR      r0,[sp,#4]
+        0x000206c0:    e5900004    ....    LDR      r0,[r0,#4]
+        0x000206c4:    ebffff85    ....    BL       sys_write0 ; 0x204e0
+        0x000206c8:    e3a0000a    ....    MOV      r0,#0xa
+        0x000206cc:    ebffff7c    |...    BL       sys_writec ; 0x204c4
+        0x000206d0:    eaffffff    ....    B        0x206d4 ; _ZN6Parser9try_parseEv + 92
+        0x000206d4:    e59d0004    ....    LDR      r0,[sp,#4]
+        0x000206d8:    e5900000    ....    LDR      r0,[r0,#0]
+        0x000206dc:    e590100c    ....    LDR      r1,[r0,#0xc]
+        0x000206e0:    e3a00000    ....    MOV      r0,#0
+        0x000206e4:    e3510c01    ..Q.    CMP      r1,#0x100
+        0x000206e8:    e58d0000    ....    STR      r0,[sp,#0]
+        0x000206ec:    0a000007    ....    BEQ      0x20710 ; _ZN6Parser9try_parseEv + 152
+        0x000206f0:    eaffffff    ....    B        0x206f4 ; _ZN6Parser9try_parseEv + 124
+        0x000206f4:    e59d0004    ....    LDR      r0,[sp,#4]
+        0x000206f8:    e5900000    ....    LDR      r0,[r0,#0]
+        0x000206fc:    e590000c    ....    LDR      r0,[r0,#0xc]
+        0x00020700:    e250000a    ..P.    SUBS     r0,r0,#0xa
+        0x00020704:    13000001    ....    MOVWNE   r0,#1
+        0x00020708:    e58d0000    ....    STR      r0,[sp,#0]
+        0x0002070c:    eaffffff    ....    B        0x20710 ; _ZN6Parser9try_parseEv + 152
+        0x00020710:    e59d0000    ....    LDR      r0,[sp,#0]
+        0x00020714:    e3100001    ....    TST      r0,#1
+        0x00020718:    0a000004    ....    BEQ      0x20730 ; _ZN6Parser9try_parseEv + 184
+        0x0002071c:    eaffffff    ....    B        0x20720 ; _ZN6Parser9try_parseEv + 168
+        0x00020720:    e59d0004    ....    LDR      r0,[sp,#4]
+        0x00020724:    e5900000    ....    LDR      r0,[r0,#0]
+        0x00020728:    eb00000d    ....    BL       _ZN5Lexer4nextEv ; 0x20764
+        0x0002072c:    eaffffe8    ....    B        0x206d4 ; _ZN6Parser9try_parseEv + 92
+        0x00020730:    e59d0004    ....    LDR      r0,[sp,#4]
+        0x00020734:    e5900000    ....    LDR      r0,[r0,#0]
+        0x00020738:    e590000c    ....    LDR      r0,[r0,#0xc]
+        0x0002073c:    e350000a    ..P.    CMP      r0,#0xa
+        0x00020740:    1a000004    ....    BNE      0x20758 ; _ZN6Parser9try_parseEv + 224
+        0x00020744:    eaffffff    ....    B        0x20748 ; _ZN6Parser9try_parseEv + 208
+        0x00020748:    e59d0004    ....    LDR      r0,[sp,#4]
+        0x0002074c:    e5900000    ....    LDR      r0,[r0,#0]
+        0x00020750:    eb000003    ....    BL       _ZN5Lexer4nextEv ; 0x20764
+        0x00020754:    eaffffff    ....    B        0x20758 ; _ZN6Parser9try_parseEv + 224
+        0x00020758:    eaffffff    ....    B        0x2075c ; _ZN6Parser9try_parseEv + 228
+        0x0002075c:    e1a0d00b    ....    MOV      sp,r11
+        0x00020760:    e8bd8800    ....    POP      {r11,pc}
+    $a.5
+    _ZN5Lexer4nextEv
+        0x00020764:    e92d4800    .H-.    PUSH     {r11,lr}
+        0x00020768:    e1a0b00d    ....    MOV      r11,sp
+        0x0002076c:    e24dd008    ..M.    SUB      sp,sp,#8
+        0x00020770:    e58d0004    ....    STR      r0,[sp,#4]
+        0x00020774:    e59d0004    ....    LDR      r0,[sp,#4]
+        0x00020778:    eb000001    ....    BL       _ZN5Lexer10next_innerEv ; 0x20784
+        0x0002077c:    e1a0d00b    ....    MOV      sp,r11
+        0x00020780:    e8bd8800    ....    POP      {r11,pc}
+    $a.6
+    _ZN5Lexer10next_innerEv
+        0x00020784:    e92d4800    .H-.    PUSH     {r11,lr}
+        0x00020788:    e1a0b00d    ....    MOV      r11,sp
+        0x0002078c:    e24dd018    ..M.    SUB      sp,sp,#0x18
+        0x00020790:    e50b0004    ....    STR      r0,[r11,#-4]
+        0x00020794:    e51b0004    ....    LDR      r0,[r11,#-4]
+        0x00020798:    e58d0008    ....    STR      r0,[sp,#8]
+        0x0002079c:    e5d00008    ....    LDRB     r0,[r0,#8]
+        0x000207a0:    e3100001    ....    TST      r0,#1
+        0x000207a4:    1a000003    ....    BNE      0x207b8 ; _ZN5Lexer10next_innerEv + 52
+        0x000207a8:    eaffffff    ....    B        0x207ac ; _ZN5Lexer10next_innerEv + 40
+        0x000207ac:    e59d0008    ....    LDR      r0,[sp,#8]
+        0x000207b0:    eb0000e5    ....    BL       _ZN5Lexer6nextchEv ; 0x20b4c
+        0x000207b4:    eaffffff    ....    B        0x207b8 ; _ZN5Lexer10next_innerEv + 52
+        0x000207b8:    eaffffff    ....    B        0x207bc ; _ZN5Lexer10next_innerEv + 56
+        0x000207bc:    e59d0008    ....    LDR      r0,[sp,#8]
+        0x000207c0:    e5901004    ....    LDR      r1,[r0,#4]
+        0x000207c4:    e3a00001    ....    MOV      r0,#1
+        0x000207c8:    e3510020     .Q.    CMP      r1,#0x20
+        0x000207cc:    e58d0004    ....    STR      r0,[sp,#4]
+        0x000207d0:    0a00000e    ....    BEQ      0x20810 ; _ZN5Lexer10next_innerEv + 140
+        0x000207d4:    eaffffff    ....    B        0x207d8 ; _ZN5Lexer10next_innerEv + 84
+        0x000207d8:    e59d0008    ....    LDR      r0,[sp,#8]
+        0x000207dc:    e5901004    ....    LDR      r1,[r0,#4]
+        0x000207e0:    e3a00001    ....    MOV      r0,#1
+        0x000207e4:    e3510009    ..Q.    CMP      r1,#9
+        0x000207e8:    e58d0004    ....    STR      r0,[sp,#4]
+        0x000207ec:    0a000007    ....    BEQ      0x20810 ; _ZN5Lexer10next_innerEv + 140
+        0x000207f0:    eaffffff    ....    B        0x207f4 ; _ZN5Lexer10next_innerEv + 112
+        0x000207f4:    e59d0008    ....    LDR      r0,[sp,#8]
+        0x000207f8:    e5900004    ....    LDR      r0,[r0,#4]
+        0x000207fc:    e240000d    ..@.    SUB      r0,r0,#0xd
+        0x00020800:    e16f0f10    ..o.    CLZ      r0,r0
+        0x00020804:    e1a002a0    ....    LSR      r0,r0,#5
+        0x00020808:    e58d0004    ....    STR      r0,[sp,#4]
+        0x0002080c:    eaffffff    ....    B        0x20810 ; _ZN5Lexer10next_innerEv + 140
+        0x00020810:    e59d0004    ....    LDR      r0,[sp,#4]
+        0x00020814:    e3100001    ....    TST      r0,#1
+        0x00020818:    0a000003    ....    BEQ      0x2082c ; _ZN5Lexer10next_innerEv + 168
+        0x0002081c:    eaffffff    ....    B        0x20820 ; _ZN5Lexer10next_innerEv + 156
+        0x00020820:    e59d0008    ....    LDR      r0,[sp,#8]
+        0x00020824:    eb0000c8    ....    BL       _ZN5Lexer6nextchEv ; 0x20b4c
+        0x00020828:    eaffffe3    ....    B        0x207bc ; _ZN5Lexer10next_innerEv + 56
+        0x0002082c:    e59d0008    ....    LDR      r0,[sp,#8]
+        0x00020830:    e5900004    ....    LDR      r0,[r0,#4]
+        0x00020834:    e3500023    #.P.    CMP      r0,#0x23
+        0x00020838:    1a000019    ....    BNE      0x208a4 ; _ZN5Lexer10next_innerEv + 288
+        0x0002083c:    eaffffff    ....    B        0x20840 ; _ZN5Lexer10next_innerEv + 188
+        0x00020840:    e59d0008    ....    LDR      r0,[sp,#8]
+        0x00020844:    eb0000c0    ....    BL       _ZN5Lexer6nextchEv ; 0x20b4c
+        0x00020848:    eaffffff    ....    B        0x2084c ; _ZN5Lexer10next_innerEv + 200
+        0x0002084c:    e59d0008    ....    LDR      r0,[sp,#8]
+        0x00020850:    e5901004    ....    LDR      r1,[r0,#4]
+        0x00020854:    e3a00000    ....    MOV      r0,#0
+        0x00020858:    e351000a    ..Q.    CMP      r1,#0xa
+        0x0002085c:    e58d0000    ....    STR      r0,[sp,#0]
+        0x00020860:    0a000007    ....    BEQ      0x20884 ; _ZN5Lexer10next_innerEv + 256
+        0x00020864:    eaffffff    ....    B        0x20868 ; _ZN5Lexer10next_innerEv + 228
+        0x00020868:    e59d0008    ....    LDR      r0,[sp,#8]
+        0x0002086c:    e5900004    ....    LDR      r0,[r0,#4]
+        0x00020870:    e3e0107f    ....    MVN      r1,#0x7f
+        0x00020874:    e0500001    ..P.    SUBS     r0,r0,r1
+        0x00020878:    13000001    ....    MOVWNE   r0,#1
+        0x0002087c:    e58d0000    ....    STR      r0,[sp,#0]
+        0x00020880:    eaffffff    ....    B        0x20884 ; _ZN5Lexer10next_innerEv + 256
+        0x00020884:    e59d0000    ....    LDR      r0,[sp,#0]
+        0x00020888:    e3100001    ....    TST      r0,#1
+        0x0002088c:    0a000003    ....    BEQ      0x208a0 ; _ZN5Lexer10next_innerEv + 284
+        0x00020890:    eaffffff    ....    B        0x20894 ; _ZN5Lexer10next_innerEv + 272
+        0x00020894:    e59d0008    ....    LDR      r0,[sp,#8]
+        0x00020898:    eb0000ab    ....    BL       _ZN5Lexer6nextchEv ; 0x20b4c
+        0x0002089c:    eaffffea    ....    B        0x2084c ; _ZN5Lexer10next_innerEv + 200
+        0x000208a0:    eaffffff    ....    B        0x208a4 ; _ZN5Lexer10next_innerEv + 288
+        0x000208a4:    e59d0008    ....    LDR      r0,[sp,#8]
+        0x000208a8:    e5900004    ....    LDR      r0,[r0,#4]
+        0x000208ac:    e3700080    ..p.    CMN      r0,#0x80
+        0x000208b0:    1a000004    ....    BNE      0x208c8 ; _ZN5Lexer10next_innerEv + 324
+        0x000208b4:    eaffffff    ....    B        0x208b8 ; _ZN5Lexer10next_innerEv + 308
+        0x000208b8:    e59d1008    ....    LDR      r1,[sp,#8]
+        0x000208bc:    e3a00c01    ....    MOV      r0,#0x100
+        0x000208c0:    e581000c    ....    STR      r0,[r1,#0xc]
+        0x000208c4:    ea00009e    ....    B        0x20b44 ; _ZN5Lexer10next_innerEv + 960
+        0x000208c8:    e59d0008    ....    LDR      r0,[sp,#8]
+        0x000208cc:    e5900004    ....    LDR      r0,[r0,#4]
+        0x000208d0:    e350002b    +.P.    CMP      r0,#0x2b
+        0x000208d4:    0a00001e    ....    BEQ      0x20954 ; _ZN5Lexer10next_innerEv + 464
+        0x000208d8:    eaffffff    ....    B        0x208dc ; _ZN5Lexer10next_innerEv + 344
+        0x000208dc:    e59d0008    ....    LDR      r0,[sp,#8]
+        0x000208e0:    e5900004    ....    LDR      r0,[r0,#4]
+        0x000208e4:    e350002d    -.P.    CMP      r0,#0x2d
+        0x000208e8:    0a000019    ....    BEQ      0x20954 ; _ZN5Lexer10next_innerEv + 464
+        0x000208ec:    eaffffff    ....    B        0x208f0 ; _ZN5Lexer10next_innerEv + 364
+        0x000208f0:    e59d0008    ....    LDR      r0,[sp,#8]
+        0x000208f4:    e5900004    ....    LDR      r0,[r0,#4]
+        0x000208f8:    e350002a    *.P.    CMP      r0,#0x2a
+        0x000208fc:    0a000014    ....    BEQ      0x20954 ; _ZN5Lexer10next_innerEv + 464
+        0x00020900:    eaffffff    ....    B        0x20904 ; _ZN5Lexer10next_innerEv + 384
+        0x00020904:    e59d0008    ....    LDR      r0,[sp,#8]
+        0x00020908:    e5900004    ....    LDR      r0,[r0,#4]
+        0x0002090c:    e3500028    (.P.    CMP      r0,#0x28
+        0x00020910:    0a00000f    ....    BEQ      0x20954 ; _ZN5Lexer10next_innerEv + 464
+        0x00020914:    eaffffff    ....    B        0x20918 ; _ZN5Lexer10next_innerEv + 404
+        0x00020918:    e59d0008    ....    LDR      r0,[sp,#8]
+        0x0002091c:    e5900004    ....    LDR      r0,[r0,#4]
+        0x00020920:    e3500029    ).P.    CMP      r0,#0x29
+        0x00020924:    0a00000a    ....    BEQ      0x20954 ; _ZN5Lexer10next_innerEv + 464
+        0x00020928:    eaffffff    ....    B        0x2092c ; _ZN5Lexer10next_innerEv + 424
+        0x0002092c:    e59d0008    ....    LDR      r0,[sp,#8]
+        0x00020930:    e5900004    ....    LDR      r0,[r0,#4]
+        0x00020934:    e350005e    ^.P.    CMP      r0,#0x5e
+        0x00020938:    0a000005    ....    BEQ      0x20954 ; _ZN5Lexer10next_innerEv + 464
+        0x0002093c:    eaffffff    ....    B        0x20940 ; _ZN5Lexer10next_innerEv + 444
+        0x00020940:    e59d0008    ....    LDR      r0,[sp,#8]
+        0x00020944:    e5900004    ....    LDR      r0,[r0,#4]
+        0x00020948:    e350000a    ..P.    CMP      r0,#0xa
+        0x0002094c:    1a000006    ....    BNE      0x2096c ; _ZN5Lexer10next_innerEv + 488
+        0x00020950:    eaffffff    ....    B        0x20954 ; _ZN5Lexer10next_innerEv + 464
+        0x00020954:    e59d1008    ....    LDR      r1,[sp,#8]
+        0x00020958:    e5910004    ....    LDR      r0,[r1,#4]
+        0x0002095c:    e581000c    ....    STR      r0,[r1,#0xc]
+        0x00020960:    e3a00000    ....    MOV      r0,#0
+        0x00020964:    e5c10008    ....    STRB     r0,[r1,#8]
+        0x00020968:    ea000075    u...    B        0x20b44 ; _ZN5Lexer10next_innerEv + 960
+        0x0002096c:    e59d0008    ....    LDR      r0,[sp,#8]
+        0x00020970:    e5900004    ....    LDR      r0,[r0,#4]
+        0x00020974:    e3500030    0.P.    CMP      r0,#0x30
+        0x00020978:    ba00006c    l...    BLT      0x20b30 ; _ZN5Lexer10next_innerEv + 940
+        0x0002097c:    eaffffff    ....    B        0x20980 ; _ZN5Lexer10next_innerEv + 508
+        0x00020980:    e59d0008    ....    LDR      r0,[sp,#8]
+        0x00020984:    e5900004    ....    LDR      r0,[r0,#4]
+        0x00020988:    e3500039    9.P.    CMP      r0,#0x39
+        0x0002098c:    ca000067    g...    BGT      0x20b30 ; _ZN5Lexer10next_innerEv + 940
+        0x00020990:    eaffffff    ....    B        0x20994 ; _ZN5Lexer10next_innerEv + 528
+        0x00020994:    e59d0008    ....    LDR      r0,[sp,#8]
+        0x00020998:    e5901004    ....    LDR      r1,[r0,#4]
+        0x0002099c:    e2411030    0.A.    SUB      r1,r1,#0x30
+        0x000209a0:    e5801010    ....    STR      r1,[r0,#0x10]
+        0x000209a4:    eb000068    h...    BL       _ZN5Lexer6nextchEv ; 0x20b4c
+        0x000209a8:    e59d0008    ....    LDR      r0,[sp,#8]
+        0x000209ac:    e3a0100a    ....    MOV      r1,#0xa
+        0x000209b0:    e50b1008    ....    STR      r1,[r11,#-8]
+        0x000209b4:    e5900010    ....    LDR      r0,[r0,#0x10]
+        0x000209b8:    e3500000    ..P.    CMP      r0,#0
+        0x000209bc:    1a00000f    ....    BNE      0x20a00 ; _ZN5Lexer10next_innerEv + 636
+        0x000209c0:    eaffffff    ....    B        0x209c4 ; _ZN5Lexer10next_innerEv + 576
+        0x000209c4:    e59d0008    ....    LDR      r0,[sp,#8]
+        0x000209c8:    e5900004    ....    LDR      r0,[r0,#4]
+        0x000209cc:    e3500078    x.P.    CMP      r0,#0x78
+        0x000209d0:    0a000005    ....    BEQ      0x209ec ; _ZN5Lexer10next_innerEv + 616
+        0x000209d4:    eaffffff    ....    B        0x209d8 ; _ZN5Lexer10next_innerEv + 596
+        0x000209d8:    e59d0008    ....    LDR      r0,[sp,#8]
+        0x000209dc:    e5900004    ....    LDR      r0,[r0,#4]
+        0x000209e0:    e3500058    X.P.    CMP      r0,#0x58
+        0x000209e4:    1a000005    ....    BNE      0x20a00 ; _ZN5Lexer10next_innerEv + 636
+        0x000209e8:    eaffffff    ....    B        0x209ec ; _ZN5Lexer10next_innerEv + 616
+        0x000209ec:    e59d0008    ....    LDR      r0,[sp,#8]
+        0x000209f0:    e3a01010    ....    MOV      r1,#0x10
+        0x000209f4:    e50b1008    ....    STR      r1,[r11,#-8]
+        0x000209f8:    eb000053    S...    BL       _ZN5Lexer6nextchEv ; 0x20b4c
+        0x000209fc:    ea000008    ....    B        0x20a24 ; _ZN5Lexer10next_innerEv + 672
+        0x00020a00:    e59d0008    ....    LDR      r0,[sp,#8]
+        0x00020a04:    e5900010    ....    LDR      r0,[r0,#0x10]
+        0x00020a08:    e3500000    ..P.    CMP      r0,#0
+        0x00020a0c:    1a000003    ....    BNE      0x20a20 ; _ZN5Lexer10next_innerEv + 668
+        0x00020a10:    eaffffff    ....    B        0x20a14 ; _ZN5Lexer10next_innerEv + 656
+        0x00020a14:    e3a00008    ....    MOV      r0,#8
+        0x00020a18:    e50b0008    ....    STR      r0,[r11,#-8]
+        0x00020a1c:    eaffffff    ....    B        0x20a20 ; _ZN5Lexer10next_innerEv + 668
+        0x00020a20:    eaffffff    ....    B        0x20a24 ; _ZN5Lexer10next_innerEv + 672
+        0x00020a24:    eaffffff    ....    B        0x20a28 ; _ZN5Lexer10next_innerEv + 676
+        0x00020a28:    e59d0008    ....    LDR      r0,[sp,#8]
+        0x00020a2c:    e5900004    ....    LDR      r0,[r0,#4]
+        0x00020a30:    e3500030    0.P.    CMP      r0,#0x30
+        0x00020a34:    ba00000a    ....    BLT      0x20a64 ; _ZN5Lexer10next_innerEv + 736
+        0x00020a38:    eaffffff    ....    B        0x20a3c ; _ZN5Lexer10next_innerEv + 696
+        0x00020a3c:    e59d0008    ....    LDR      r0,[sp,#8]
+        0x00020a40:    e5900004    ....    LDR      r0,[r0,#4]
+        0x00020a44:    e3500039    9.P.    CMP      r0,#0x39
+        0x00020a48:    ca000005    ....    BGT      0x20a64 ; _ZN5Lexer10next_innerEv + 736
+        0x00020a4c:    eaffffff    ....    B        0x20a50 ; _ZN5Lexer10next_innerEv + 716
+        0x00020a50:    e59d0008    ....    LDR      r0,[sp,#8]
+        0x00020a54:    e5900004    ....    LDR      r0,[r0,#4]
+        0x00020a58:    e2400030    0.@.    SUB      r0,r0,#0x30
+        0x00020a5c:    e58d000c    ....    STR      r0,[sp,#0xc]
+        0x00020a60:    ea000020     ...    B        0x20ae8 ; _ZN5Lexer10next_innerEv + 868
+        0x00020a64:    e59d0008    ....    LDR      r0,[sp,#8]
+        0x00020a68:    e5900004    ....    LDR      r0,[r0,#4]
+        0x00020a6c:    e3500041    A.P.    CMP      r0,#0x41
+        0x00020a70:    ba00000a    ....    BLT      0x20aa0 ; _ZN5Lexer10next_innerEv + 796
+        0x00020a74:    eaffffff    ....    B        0x20a78 ; _ZN5Lexer10next_innerEv + 756
+        0x00020a78:    e59d0008    ....    LDR      r0,[sp,#8]
+        0x00020a7c:    e5900004    ....    LDR      r0,[r0,#4]
+        0x00020a80:    e3500046    F.P.    CMP      r0,#0x46
+        0x00020a84:    ca000005    ....    BGT      0x20aa0 ; _ZN5Lexer10next_innerEv + 796
+        0x00020a88:    eaffffff    ....    B        0x20a8c ; _ZN5Lexer10next_innerEv + 776
+        0x00020a8c:    e59d0008    ....    LDR      r0,[sp,#8]
+        0x00020a90:    e5900004    ....    LDR      r0,[r0,#4]
+        0x00020a94:    e2400037    7.@.    SUB      r0,r0,#0x37
+        0x00020a98:    e58d000c    ....    STR      r0,[sp,#0xc]
+        0x00020a9c:    ea000010    ....    B        0x20ae4 ; _ZN5Lexer10next_innerEv + 864
+        0x00020aa0:    e59d0008    ....    LDR      r0,[sp,#8]
+        0x00020aa4:    e5900004    ....    LDR      r0,[r0,#4]
+        0x00020aa8:    e3500061    a.P.    CMP      r0,#0x61
+        0x00020aac:    ba00000a    ....    BLT      0x20adc ; _ZN5Lexer10next_innerEv + 856
+        0x00020ab0:    eaffffff    ....    B        0x20ab4 ; _ZN5Lexer10next_innerEv + 816
+        0x00020ab4:    e59d0008    ....    LDR      r0,[sp,#8]
+        0x00020ab8:    e5900004    ....    LDR      r0,[r0,#4]
+        0x00020abc:    e3500066    f.P.    CMP      r0,#0x66
+        0x00020ac0:    ca000005    ....    BGT      0x20adc ; _ZN5Lexer10next_innerEv + 856
+        0x00020ac4:    eaffffff    ....    B        0x20ac8 ; _ZN5Lexer10next_innerEv + 836
+        0x00020ac8:    e59d0008    ....    LDR      r0,[sp,#8]
+        0x00020acc:    e5900004    ....    LDR      r0,[r0,#4]
+        0x00020ad0:    e2400057    W.@.    SUB      r0,r0,#0x57
+        0x00020ad4:    e58d000c    ....    STR      r0,[sp,#0xc]
+        0x00020ad8:    ea000000    ....    B        0x20ae0 ; _ZN5Lexer10next_innerEv + 860
+        0x00020adc:    ea00000f    ....    B        0x20b20 ; _ZN5Lexer10next_innerEv + 924
+        0x00020ae0:    eaffffff    ....    B        0x20ae4 ; _ZN5Lexer10next_innerEv + 864
+        0x00020ae4:    eaffffff    ....    B        0x20ae8 ; _ZN5Lexer10next_innerEv + 868
+        0x00020ae8:    e59d000c    ....    LDR      r0,[sp,#0xc]
+        0x00020aec:    e51b1008    ....    LDR      r1,[r11,#-8]
+        0x00020af0:    e1500001    ..P.    CMP      r0,r1
+        0x00020af4:    3a000001    ...:    BCC      0x20b00 ; _ZN5Lexer10next_innerEv + 892
+        0x00020af8:    eaffffff    ....    B        0x20afc ; _ZN5Lexer10next_innerEv + 888
+        0x00020afc:    ea000007    ....    B        0x20b20 ; _ZN5Lexer10next_innerEv + 924
+        0x00020b00:    e59d0008    ....    LDR      r0,[sp,#8]
+        0x00020b04:    e5901010    ....    LDR      r1,[r0,#0x10]
+        0x00020b08:    e51b2008    . ..    LDR      r2,[r11,#-8]
+        0x00020b0c:    e59d300c    .0..    LDR      r3,[sp,#0xc]
+        0x00020b10:    e0213291    .2!.    MLA      r1,r1,r2,r3
+        0x00020b14:    e5801010    ....    STR      r1,[r0,#0x10]
+        0x00020b18:    eb00000b    ....    BL       _ZN5Lexer6nextchEv ; 0x20b4c
+        0x00020b1c:    eaffffc1    ....    B        0x20a28 ; _ZN5Lexer10next_innerEv + 676
+        0x00020b20:    e59d1008    ....    LDR      r1,[sp,#8]
+        0x00020b24:    e3000101    ....    MOV      r0,#0x101
+        0x00020b28:    e581000c    ....    STR      r0,[r1,#0xc]
+        0x00020b2c:    ea000004    ....    B        0x20b44 ; _ZN5Lexer10next_innerEv + 960
+        0x00020b30:    e59d0008    ....    LDR      r0,[sp,#8]
+        0x00020b34:    e3001102    ....    MOVW     r1,#0x102
+        0x00020b38:    e580100c    ....    STR      r1,[r0,#0xc]
+        0x00020b3c:    eb000002    ....    BL       _ZN5Lexer6nextchEv ; 0x20b4c
+        0x00020b40:    eaffffff    ....    B        0x20b44 ; _ZN5Lexer10next_innerEv + 960
+        0x00020b44:    e1a0d00b    ....    MOV      sp,r11
+        0x00020b48:    e8bd8800    ....    POP      {r11,pc}
+    $a.7
+    _ZN5Lexer6nextchEv
+        0x00020b4c:    e92d4800    .H-.    PUSH     {r11,lr}
+        0x00020b50:    e1a0b00d    ....    MOV      r11,sp
+        0x00020b54:    e24dd008    ..M.    SUB      sp,sp,#8
+        0x00020b58:    e58d0004    ....    STR      r0,[sp,#4]
+        0x00020b5c:    e59d0004    ....    LDR      r0,[sp,#4]
+        0x00020b60:    e58d0000    ....    STR      r0,[sp,#0]
+        0x00020b64:    e5900000    ....    LDR      r0,[r0,#0]
+        0x00020b68:    eb000005    ....    BL       _ZN10FileReader5getchEv ; 0x20b84
+        0x00020b6c:    e59d1000    ....    LDR      r1,[sp,#0]
+        0x00020b70:    e5810004    ....    STR      r0,[r1,#4]
+        0x00020b74:    e3a00001    ....    MOV      r0,#1
+        0x00020b78:    e5c10008    ....    STRB     r0,[r1,#8]
+        0x00020b7c:    e1a0d00b    ....    MOV      sp,r11
+        0x00020b80:    e8bd8800    ....    POP      {r11,pc}
+    $a.8
+    _ZN10FileReader5getchEv
+        0x00020b84:    e92d4800    .H-.    PUSH     {r11,lr}
+        0x00020b88:    e1a0b00d    ....    MOV      r11,sp
+        0x00020b8c:    e24dd010    ..M.    SUB      sp,sp,#0x10
+        0x00020b90:    e58d0008    ....    STR      r0,[sp,#8]
+        0x00020b94:    e59d1008    ....    LDR      r1,[sp,#8]
+        0x00020b98:    e58d1000    ....    STR      r1,[sp,#0]
+        0x00020b9c:    e5910404    ....    LDR      r0,[r1,#0x404]
+        0x00020ba0:    e5911408    ....    LDR      r1,[r1,#0x408]
+        0x00020ba4:    e1500001    ..P.    CMP      r0,r1
+        0x00020ba8:    3a000021    !..:    BCC      0x20c34 ; _ZN10FileReader5getchEv + 176
+        0x00020bac:    eaffffff    ....    B        0x20bb0 ; _ZN10FileReader5getchEv + 44
+        0x00020bb0:    e59d0000    ....    LDR      r0,[sp,#0]
+        0x00020bb4:    e5d0040c    ....    LDRB     r0,[r0,#0x40c]
+        0x00020bb8:    e3100001    ....    TST      r0,#1
+        0x00020bbc:    0a000003    ....    BEQ      0x20bd0 ; _ZN10FileReader5getchEv + 76
+        0x00020bc0:    eaffffff    ....    B        0x20bc4 ; _ZN10FileReader5getchEv + 64
+        0x00020bc4:    e3e0007f    ....    MVN      r0,#0x7f
+        0x00020bc8:    e50b0004    ....    STR      r0,[r11,#-4]
+        0x00020bcc:    ea000020     ...    B        0x20c54 ; _ZN10FileReader5getchEv + 208
+        0x00020bd0:    e59d1000    ....    LDR      r1,[sp,#0]
+        0x00020bd4:    e5910000    ....    LDR      r0,[r1,#0]
+        0x00020bd8:    e2811004    ....    ADD      r1,r1,#4
+        0x00020bdc:    e3a02b01    .+..    MOV      r2,#0x400
+        0x00020be0:    ebfffdc5    ....    BL       sys_read ; 0x202fc
+        0x00020be4:    e1a01000    ....    MOV      r1,r0
+        0x00020be8:    e59d0000    ....    LDR      r0,[sp,#0]
+        0x00020bec:    e58d1004    ....    STR      r1,[sp,#4]
+        0x00020bf0:    e59d1004    ....    LDR      r1,[sp,#4]
+        0x00020bf4:    e2611b01    ..a.    RSB      r1,r1,#0x400
+        0x00020bf8:    e5801408    ....    STR      r1,[r0,#0x408]
+        0x00020bfc:    e5900408    ....    LDR      r0,[r0,#0x408]
+        0x00020c00:    e3500000    ..P.    CMP      r0,#0
+        0x00020c04:    1a000006    ....    BNE      0x20c24 ; _ZN10FileReader5getchEv + 160
+        0x00020c08:    eaffffff    ....    B        0x20c0c ; _ZN10FileReader5getchEv + 136
+        0x00020c0c:    e59d1000    ....    LDR      r1,[sp,#0]
+        0x00020c10:    e3a00001    ....    MOV      r0,#1
+        0x00020c14:    e5c1040c    ....    STRB     r0,[r1,#0x40c]
+        0x00020c18:    e3e0007f    ....    MVN      r0,#0x7f
+        0x00020c1c:    e50b0004    ....    STR      r0,[r11,#-4]
+        0x00020c20:    ea00000b    ....    B        0x20c54 ; _ZN10FileReader5getchEv + 208
+        0x00020c24:    e59d1000    ....    LDR      r1,[sp,#0]
+        0x00020c28:    e3a00000    ....    MOV      r0,#0
+        0x00020c2c:    e5810404    ....    STR      r0,[r1,#0x404]
+        0x00020c30:    eaffffff    ....    B        0x20c34 ; _ZN10FileReader5getchEv + 176
+        0x00020c34:    e59d2000    . ..    LDR      r2,[sp,#0]
+        0x00020c38:    e5921404    ....    LDR      r1,[r2,#0x404]
+        0x00020c3c:    e0820001    ....    ADD      r0,r2,r1
+        0x00020c40:    e2811001    ....    ADD      r1,r1,#1
+        0x00020c44:    e5821404    ....    STR      r1,[r2,#0x404]
+        0x00020c48:    e5d00004    ....    LDRB     r0,[r0,#4]
+        0x00020c4c:    e50b0004    ....    STR      r0,[r11,#-4]
+        0x00020c50:    eaffffff    ....    B        0x20c54 ; _ZN10FileReader5getchEv + 208
+        0x00020c54:    e51b0004    ....    LDR      r0,[r11,#-4]
+        0x00020c58:    e1a0d00b    ....    MOV      sp,r11
+        0x00020c5c:    e8bd8800    ....    POP      {r11,pc}
+    $a.9
+    _ZN6Parser4exprERj
+        0x00020c60:    e92d4800    .H-.    PUSH     {r11,lr}
+        0x00020c64:    e1a0b00d    ....    MOV      r11,sp
+        0x00020c68:    e24dd010    ..M.    SUB      sp,sp,#0x10
+        0x00020c6c:    e58d0008    ....    STR      r0,[sp,#8]
+        0x00020c70:    e58d1004    ....    STR      r1,[sp,#4]
+        0x00020c74:    e59d0008    ....    LDR      r0,[sp,#8]
+        0x00020c78:    e58d0000    ....    STR      r0,[sp,#0]
+        0x00020c7c:    e59d1004    ....    LDR      r1,[sp,#4]
+        0x00020c80:    eb000018    ....    BL       _ZN6Parser3addERj ; 0x20ce8
+        0x00020c84:    e3500000    ..P.    CMP      r0,#0
+        0x00020c88:    1a000003    ....    BNE      0x20c9c ; _ZN6Parser4exprERj + 60
+        0x00020c8c:    eaffffff    ....    B        0x20c90 ; _ZN6Parser4exprERj + 48
+        0x00020c90:    e3a00000    ....    MOV      r0,#0
+        0x00020c94:    e54b0001    ..K.    STRB     r0,[r11,#-1]
+        0x00020c98:    ea00000f    ....    B        0x20cdc ; _ZN6Parser4exprERj + 124
+        0x00020c9c:    e59d0000    ....    LDR      r0,[sp,#0]
+        0x00020ca0:    e5900000    ....    LDR      r0,[r0,#0]
+        0x00020ca4:    e590000c    ....    LDR      r0,[r0,#0xc]
+        0x00020ca8:    e350000a    ..P.    CMP      r0,#0xa
+        0x00020cac:    0a000007    ....    BEQ      0x20cd0 ; _ZN6Parser4exprERj + 112
+        0x00020cb0:    eaffffff    ....    B        0x20cb4 ; _ZN6Parser4exprERj + 84
+        0x00020cb4:    e59d0000    ....    LDR      r0,[sp,#0]
+        0x00020cb8:    e30010e4    ....    MOVW     r1,#0xe4
+        0x00020cbc:    e3401001    ..@.    MOVT     r1,#1
+        0x00020cc0:    eb000051    Q...    BL       _ZN6Parser5errorEPKc ; 0x20e0c
+        0x00020cc4:    e3a00000    ....    MOV      r0,#0
+        0x00020cc8:    e54b0001    ..K.    STRB     r0,[r11,#-1]
+        0x00020ccc:    ea000002    ....    B        0x20cdc ; _ZN6Parser4exprERj + 124
+        0x00020cd0:    e3a00001    ....    MOV      r0,#1
+        0x00020cd4:    e54b0001    ..K.    STRB     r0,[r11,#-1]
+        0x00020cd8:    eaffffff    ....    B        0x20cdc ; _ZN6Parser4exprERj + 124
+        0x00020cdc:    e55b0001    ..[.    LDRB     r0,[r11,#-1]
+        0x00020ce0:    e1a0d00b    ....    MOV      sp,r11
+        0x00020ce4:    e8bd8800    ....    POP      {r11,pc}
+    $a.10
+    _ZN6Parser3addERj
+        0x00020ce8:    e92d4800    .H-.    PUSH     {r11,lr}
+        0x00020cec:    e1a0b00d    ....    MOV      r11,sp
+        0x00020cf0:    e24dd020     .M.    SUB      sp,sp,#0x20
+        0x00020cf4:    e50b0008    ....    STR      r0,[r11,#-8]
+        0x00020cf8:    e50b100c    ....    STR      r1,[r11,#-0xc]
+        0x00020cfc:    e51b0008    ....    LDR      r0,[r11,#-8]
+        0x00020d00:    e58d0008    ....    STR      r0,[sp,#8]
+        0x00020d04:    e51b100c    ....    LDR      r1,[r11,#-0xc]
+        0x00020d08:    eb000047    G...    BL       _ZN6Parser4multERj ; 0x20e2c
+        0x00020d0c:    e3500000    ..P.    CMP      r0,#0
+        0x00020d10:    1a000003    ....    BNE      0x20d24 ; _ZN6Parser3addERj + 60
+        0x00020d14:    eaffffff    ....    B        0x20d18 ; _ZN6Parser3addERj + 48
+        0x00020d18:    e3a00000    ....    MOV      r0,#0
+        0x00020d1c:    e54b0001    ..K.    STRB     r0,[r11,#-1]
+        0x00020d20:    ea000036    6...    B        0x20e00 ; _ZN6Parser3addERj + 280
+        0x00020d24:    eaffffff    ....    B        0x20d28 ; _ZN6Parser3addERj + 64
+        0x00020d28:    e59d0008    ....    LDR      r0,[sp,#8]
+        0x00020d2c:    e5900000    ....    LDR      r0,[r0,#0]
+        0x00020d30:    e590100c    ....    LDR      r1,[r0,#0xc]
+        0x00020d34:    e3a00001    ....    MOV      r0,#1
+        0x00020d38:    e351002b    +.Q.    CMP      r1,#0x2b
+        0x00020d3c:    e58d0004    ....    STR      r0,[sp,#4]
+        0x00020d40:    0a000008    ....    BEQ      0x20d68 ; _ZN6Parser3addERj + 128
+        0x00020d44:    eaffffff    ....    B        0x20d48 ; _ZN6Parser3addERj + 96
+        0x00020d48:    e59d0008    ....    LDR      r0,[sp,#8]
+        0x00020d4c:    e5900000    ....    LDR      r0,[r0,#0]
+        0x00020d50:    e590000c    ....    LDR      r0,[r0,#0xc]
+        0x00020d54:    e240002d    -.@.    SUB      r0,r0,#0x2d
+        0x00020d58:    e16f0f10    ..o.    CLZ      r0,r0
+        0x00020d5c:    e1a002a0    ....    LSR      r0,r0,#5
+        0x00020d60:    e58d0004    ....    STR      r0,[sp,#4]
+        0x00020d64:    eaffffff    ....    B        0x20d68 ; _ZN6Parser3addERj + 128
+        0x00020d68:    e59d0004    ....    LDR      r0,[sp,#4]
+        0x00020d6c:    e3100001    ....    TST      r0,#1
+        0x00020d70:    0a00001f    ....    BEQ      0x20df4 ; _ZN6Parser3addERj + 268
+        0x00020d74:    eaffffff    ....    B        0x20d78 ; _ZN6Parser3addERj + 144
+        0x00020d78:    e59d0008    ....    LDR      r0,[sp,#8]
+        0x00020d7c:    e3a01001    ....    MOV      r1,#1
+        0x00020d80:    e58d1010    ....    STR      r1,[sp,#0x10]
+        0x00020d84:    e5900000    ....    LDR      r0,[r0,#0]
+        0x00020d88:    e590000c    ....    LDR      r0,[r0,#0xc]
+        0x00020d8c:    e350002d    -.P.    CMP      r0,#0x2d
+        0x00020d90:    1a000004    ....    BNE      0x20da8 ; _ZN6Parser3addERj + 192
+        0x00020d94:    eaffffff    ....    B        0x20d98 ; _ZN6Parser3addERj + 176
+        0x00020d98:    e59d0010    ....    LDR      r0,[sp,#0x10]
+        0x00020d9c:    e2600000    ..`.    RSB      r0,r0,#0
+        0x00020da0:    e58d0010    ....    STR      r0,[sp,#0x10]
+        0x00020da4:    eaffffff    ....    B        0x20da8 ; _ZN6Parser3addERj + 192
+        0x00020da8:    e59d0008    ....    LDR      r0,[sp,#8]
+        0x00020dac:    e5900000    ....    LDR      r0,[r0,#0]
+        0x00020db0:    ebfffe6b    k...    BL       _ZN5Lexer4nextEv ; 0x20764
+        0x00020db4:    e59d0008    ....    LDR      r0,[sp,#8]
+        0x00020db8:    e28d100c    ....    ADD      r1,sp,#0xc
+        0x00020dbc:    eb00001a    ....    BL       _ZN6Parser4multERj ; 0x20e2c
+        0x00020dc0:    e3500000    ..P.    CMP      r0,#0
+        0x00020dc4:    1a000003    ....    BNE      0x20dd8 ; _ZN6Parser3addERj + 240
+        0x00020dc8:    eaffffff    ....    B        0x20dcc ; _ZN6Parser3addERj + 228
+        0x00020dcc:    e3a00000    ....    MOV      r0,#0
+        0x00020dd0:    e54b0001    ..K.    STRB     r0,[r11,#-1]
+        0x00020dd4:    ea000009    ....    B        0x20e00 ; _ZN6Parser3addERj + 280
+        0x00020dd8:    e59d0010    ....    LDR      r0,[sp,#0x10]
+        0x00020ddc:    e59d200c    . ..    LDR      r2,[sp,#0xc]
+        0x00020de0:    e51b100c    ....    LDR      r1,[r11,#-0xc]
+        0x00020de4:    e5913000    .0..    LDR      r3,[r1,#0]
+        0x00020de8:    e0203290    .2 .    MLA      r0,r0,r2,r3
+        0x00020dec:    e5810000    ....    STR      r0,[r1,#0]
+        0x00020df0:    eaffffcc    ....    B        0x20d28 ; _ZN6Parser3addERj + 64
+        0x00020df4:    e3a00001    ....    MOV      r0,#1
+        0x00020df8:    e54b0001    ..K.    STRB     r0,[r11,#-1]
+        0x00020dfc:    eaffffff    ....    B        0x20e00 ; _ZN6Parser3addERj + 280
+        0x00020e00:    e55b0001    ..[.    LDRB     r0,[r11,#-1]
+        0x00020e04:    e1a0d00b    ....    MOV      sp,r11
+        0x00020e08:    e8bd8800    ....    POP      {r11,pc}
+    $a.11
+    _ZN6Parser5errorEPKc
+        0x00020e0c:    e24dd008    ..M.    SUB      sp,sp,#8
+        0x00020e10:    e58d0004    ....    STR      r0,[sp,#4]
+        0x00020e14:    e58d1000    ....    STR      r1,[sp,#0]
+        0x00020e18:    e59d1004    ....    LDR      r1,[sp,#4]
+        0x00020e1c:    e59d0000    ....    LDR      r0,[sp,#0]
+        0x00020e20:    e5810004    ....    STR      r0,[r1,#4]
+        0x00020e24:    e28dd008    ....    ADD      sp,sp,#8
+        0x00020e28:    e12fff1e    ../.    BX       lr
+    $a.12
+    _ZN6Parser4multERj
+        0x00020e2c:    e92d4800    .H-.    PUSH     {r11,lr}
+        0x00020e30:    e1a0b00d    ....    MOV      r11,sp
+        0x00020e34:    e24dd018    ..M.    SUB      sp,sp,#0x18
+        0x00020e38:    e50b0008    ....    STR      r0,[r11,#-8]
+        0x00020e3c:    e58d100c    ....    STR      r1,[sp,#0xc]
+        0x00020e40:    e51b0008    ....    LDR      r0,[r11,#-8]
+        0x00020e44:    e58d0004    ....    STR      r0,[sp,#4]
+        0x00020e48:    e59d100c    ....    LDR      r1,[sp,#0xc]
+        0x00020e4c:    eb000024    $...    BL       _ZN6Parser5powerERj ; 0x20ee4
+        0x00020e50:    e3500000    ..P.    CMP      r0,#0
+        0x00020e54:    1a000003    ....    BNE      0x20e68 ; _ZN6Parser4multERj + 60
+        0x00020e58:    eaffffff    ....    B        0x20e5c ; _ZN6Parser4multERj + 48
+        0x00020e5c:    e3a00000    ....    MOV      r0,#0
+        0x00020e60:    e54b0001    ..K.    STRB     r0,[r11,#-1]
+        0x00020e64:    ea00001b    ....    B        0x20ed8 ; _ZN6Parser4multERj + 172
+        0x00020e68:    eaffffff    ....    B        0x20e6c ; _ZN6Parser4multERj + 64
+        0x00020e6c:    e59d0004    ....    LDR      r0,[sp,#4]
+        0x00020e70:    e5900000    ....    LDR      r0,[r0,#0]
+        0x00020e74:    e590000c    ....    LDR      r0,[r0,#0xc]
+        0x00020e78:    e350002a    *.P.    CMP      r0,#0x2a
+        0x00020e7c:    1a000012    ....    BNE      0x20ecc ; _ZN6Parser4multERj + 160
+        0x00020e80:    eaffffff    ....    B        0x20e84 ; _ZN6Parser4multERj + 88
+        0x00020e84:    e59d0004    ....    LDR      r0,[sp,#4]
+        0x00020e88:    e5900000    ....    LDR      r0,[r0,#0]
+        0x00020e8c:    ebfffe34    4...    BL       _ZN5Lexer4nextEv ; 0x20764
+        0x00020e90:    e59d0004    ....    LDR      r0,[sp,#4]
+        0x00020e94:    e28d1008    ....    ADD      r1,sp,#8
+        0x00020e98:    eb000011    ....    BL       _ZN6Parser5powerERj ; 0x20ee4
+        0x00020e9c:    e3500000    ..P.    CMP      r0,#0
+        0x00020ea0:    1a000003    ....    BNE      0x20eb4 ; _ZN6Parser4multERj + 136
+        0x00020ea4:    eaffffff    ....    B        0x20ea8 ; _ZN6Parser4multERj + 124
+        0x00020ea8:    e3a00000    ....    MOV      r0,#0
+        0x00020eac:    e54b0001    ..K.    STRB     r0,[r11,#-1]
+        0x00020eb0:    ea000008    ....    B        0x20ed8 ; _ZN6Parser4multERj + 172
+        0x00020eb4:    e59d2008    . ..    LDR      r2,[sp,#8]
+        0x00020eb8:    e59d100c    ....    LDR      r1,[sp,#0xc]
+        0x00020ebc:    e5910000    ....    LDR      r0,[r1,#0]
+        0x00020ec0:    e0000290    ....    MUL      r0,r0,r2
+        0x00020ec4:    e5810000    ....    STR      r0,[r1,#0]
+        0x00020ec8:    eaffffe7    ....    B        0x20e6c ; _ZN6Parser4multERj + 64
+        0x00020ecc:    e3a00001    ....    MOV      r0,#1
+        0x00020ed0:    e54b0001    ..K.    STRB     r0,[r11,#-1]
+        0x00020ed4:    eaffffff    ....    B        0x20ed8 ; _ZN6Parser4multERj + 172
+        0x00020ed8:    e55b0001    ..[.    LDRB     r0,[r11,#-1]
+        0x00020edc:    e1a0d00b    ....    MOV      sp,r11
+        0x00020ee0:    e8bd8800    ....    POP      {r11,pc}
+    $a.13
+    _ZN6Parser5powerERj
+        0x00020ee4:    e92d4800    .H-.    PUSH     {r11,lr}
+        0x00020ee8:    e1a0b00d    ....    MOV      r11,sp
+        0x00020eec:    e24dd018    ..M.    SUB      sp,sp,#0x18
+        0x00020ef0:    e50b0008    ....    STR      r0,[r11,#-8]
+        0x00020ef4:    e58d100c    ....    STR      r1,[sp,#0xc]
+        0x00020ef8:    e51b0008    ....    LDR      r0,[r11,#-8]
+        0x00020efc:    e58d0000    ....    STR      r0,[sp,#0]
+        0x00020f00:    e59d100c    ....    LDR      r1,[sp,#0xc]
+        0x00020f04:    eb000030    0...    BL       _ZN6Parser4atomERj ; 0x20fcc
+        0x00020f08:    e3500000    ..P.    CMP      r0,#0
+        0x00020f0c:    1a000003    ....    BNE      0x20f20 ; _ZN6Parser5powerERj + 60
+        0x00020f10:    eaffffff    ....    B        0x20f14 ; _ZN6Parser5powerERj + 48
+        0x00020f14:    e3a00000    ....    MOV      r0,#0
+        0x00020f18:    e54b0001    ..K.    STRB     r0,[r11,#-1]
+        0x00020f1c:    ea000027    '...    B        0x20fc0 ; _ZN6Parser5powerERj + 220
+        0x00020f20:    e59d0000    ....    LDR      r0,[sp,#0]
+        0x00020f24:    e5900000    ....    LDR      r0,[r0,#0]
+        0x00020f28:    e590000c    ....    LDR      r0,[r0,#0xc]
+        0x00020f2c:    e350005e    ^.P.    CMP      r0,#0x5e
+        0x00020f30:    1a00001f    ....    BNE      0x20fb4 ; _ZN6Parser5powerERj + 208
+        0x00020f34:    eaffffff    ....    B        0x20f38 ; _ZN6Parser5powerERj + 84
+        0x00020f38:    e59d0000    ....    LDR      r0,[sp,#0]
+        0x00020f3c:    e5900000    ....    LDR      r0,[r0,#0]
+        0x00020f40:    ebfffe07    ....    BL       _ZN5Lexer4nextEv ; 0x20764
+        0x00020f44:    e59d0000    ....    LDR      r0,[sp,#0]
+        0x00020f48:    e28d1008    ....    ADD      r1,sp,#8
+        0x00020f4c:    ebffffe4    ....    BL       _ZN6Parser5powerERj ; 0x20ee4
+        0x00020f50:    e3500000    ..P.    CMP      r0,#0
+        0x00020f54:    1a000003    ....    BNE      0x20f68 ; _ZN6Parser5powerERj + 132
+        0x00020f58:    eaffffff    ....    B        0x20f5c ; _ZN6Parser5powerERj + 120
+        0x00020f5c:    e3a00000    ....    MOV      r0,#0
+        0x00020f60:    e54b0001    ..K.    STRB     r0,[r11,#-1]
+        0x00020f64:    ea000015    ....    B        0x20fc0 ; _ZN6Parser5powerERj + 220
+        0x00020f68:    e3a00001    ....    MOV      r0,#1
+        0x00020f6c:    e58d0004    ....    STR      r0,[sp,#4]
+        0x00020f70:    eaffffff    ....    B        0x20f74 ; _ZN6Parser5powerERj + 144
+        0x00020f74:    e59d0008    ....    LDR      r0,[sp,#8]
+        0x00020f78:    e2401001    ..@.    SUB      r1,r0,#1
+        0x00020f7c:    e58d1008    ....    STR      r1,[sp,#8]
+        0x00020f80:    e3500000    ..P.    CMP      r0,#0
+        0x00020f84:    0a000006    ....    BEQ      0x20fa4 ; _ZN6Parser5powerERj + 192
+        0x00020f88:    eaffffff    ....    B        0x20f8c ; _ZN6Parser5powerERj + 168
+        0x00020f8c:    e59d000c    ....    LDR      r0,[sp,#0xc]
+        0x00020f90:    e5901000    ....    LDR      r1,[r0,#0]
+        0x00020f94:    e59d0004    ....    LDR      r0,[sp,#4]
+        0x00020f98:    e0000190    ....    MUL      r0,r0,r1
+        0x00020f9c:    e58d0004    ....    STR      r0,[sp,#4]
+        0x00020fa0:    eafffff3    ....    B        0x20f74 ; _ZN6Parser5powerERj + 144
+        0x00020fa4:    e59d0004    ....    LDR      r0,[sp,#4]
+        0x00020fa8:    e59d100c    ....    LDR      r1,[sp,#0xc]
+        0x00020fac:    e5810000    ....    STR      r0,[r1,#0]
+        0x00020fb0:    eaffffff    ....    B        0x20fb4 ; _ZN6Parser5powerERj + 208
+        0x00020fb4:    e3a00001    ....    MOV      r0,#1
+        0x00020fb8:    e54b0001    ..K.    STRB     r0,[r11,#-1]
+        0x00020fbc:    eaffffff    ....    B        0x20fc0 ; _ZN6Parser5powerERj + 220
+        0x00020fc0:    e55b0001    ..[.    LDRB     r0,[r11,#-1]
+        0x00020fc4:    e1a0d00b    ....    MOV      sp,r11
+        0x00020fc8:    e8bd8800    ....    POP      {r11,pc}
+    $a.14
+    _ZN6Parser4atomERj
+        0x00020fcc:    e92d4800    .H-.    PUSH     {r11,lr}
+        0x00020fd0:    e1a0b00d    ....    MOV      r11,sp
+        0x00020fd4:    e24dd018    ..M.    SUB      sp,sp,#0x18
+        0x00020fd8:    e50b0008    ....    STR      r0,[r11,#-8]
+        0x00020fdc:    e58d100c    ....    STR      r1,[sp,#0xc]
+        0x00020fe0:    e51b0008    ....    LDR      r0,[r11,#-8]
+        0x00020fe4:    e58d0004    ....    STR      r0,[sp,#4]
+        0x00020fe8:    e5900000    ....    LDR      r0,[r0,#0]
+        0x00020fec:    e590000c    ....    LDR      r0,[r0,#0xc]
+        0x00020ff0:    e3001101    ....    MOV      r1,#0x101
+        0x00020ff4:    e1500001    ..P.    CMP      r0,r1
+        0x00020ff8:    1a00000a    ....    BNE      0x21028 ; _ZN6Parser4atomERj + 92
+        0x00020ffc:    eaffffff    ....    B        0x21000 ; _ZN6Parser4atomERj + 52
+        0x00021000:    e59d0004    ....    LDR      r0,[sp,#4]
+        0x00021004:    e5901000    ....    LDR      r1,[r0,#0]
+        0x00021008:    e5911010    ....    LDR      r1,[r1,#0x10]
+        0x0002100c:    e59d200c    . ..    LDR      r2,[sp,#0xc]
+        0x00021010:    e5821000    ....    STR      r1,[r2,#0]
+        0x00021014:    e5900000    ....    LDR      r0,[r0,#0]
+        0x00021018:    ebfffdd1    ....    BL       _ZN5Lexer4nextEv ; 0x20764
+        0x0002101c:    e3a00001    ....    MOV      r0,#1
+        0x00021020:    e54b0001    ..K.    STRB     r0,[r11,#-1]
+        0x00021024:    ea000057    W...    B        0x21188 ; _ZN6Parser4atomERj + 444
+        0x00021028:    e59d0004    ....    LDR      r0,[sp,#4]
+        0x0002102c:    e5900000    ....    LDR      r0,[r0,#0]
+        0x00021030:    e590000c    ....    LDR      r0,[r0,#0xc]
+        0x00021034:    e3500028    (.P.    CMP      r0,#0x28
+        0x00021038:    1a00001f    ....    BNE      0x210bc ; _ZN6Parser4atomERj + 240
+        0x0002103c:    eaffffff    ....    B        0x21040 ; _ZN6Parser4atomERj + 116
+        0x00021040:    e59d0004    ....    LDR      r0,[sp,#4]
+        0x00021044:    e5900000    ....    LDR      r0,[r0,#0]
+        0x00021048:    ebfffdc5    ....    BL       _ZN5Lexer4nextEv ; 0x20764
+        0x0002104c:    e59d0004    ....    LDR      r0,[sp,#4]
+        0x00021050:    e59d100c    ....    LDR      r1,[sp,#0xc]
+        0x00021054:    ebffff23    #...    BL       _ZN6Parser3addERj ; 0x20ce8
+        0x00021058:    e3500000    ..P.    CMP      r0,#0
+        0x0002105c:    1a000003    ....    BNE      0x21070 ; _ZN6Parser4atomERj + 164
+        0x00021060:    eaffffff    ....    B        0x21064 ; _ZN6Parser4atomERj + 152
+        0x00021064:    e3a00000    ....    MOV      r0,#0
+        0x00021068:    e54b0001    ..K.    STRB     r0,[r11,#-1]
+        0x0002106c:    ea000045    E...    B        0x21188 ; _ZN6Parser4atomERj + 444
+        0x00021070:    e59d0004    ....    LDR      r0,[sp,#4]
+        0x00021074:    e5900000    ....    LDR      r0,[r0,#0]
+        0x00021078:    e590000c    ....    LDR      r0,[r0,#0xc]
+        0x0002107c:    e3500029    ).P.    CMP      r0,#0x29
+        0x00021080:    0a000007    ....    BEQ      0x210a4 ; _ZN6Parser4atomERj + 216
+        0x00021084:    eaffffff    ....    B        0x21088 ; _ZN6Parser4atomERj + 188
+        0x00021088:    e59d0004    ....    LDR      r0,[sp,#4]
+        0x0002108c:    e300112f    /...    MOV      r1,#0x12f
+        0x00021090:    e3401001    ..@.    MOVT     r1,#1
+        0x00021094:    ebffff5c    \...    BL       _ZN6Parser5errorEPKc ; 0x20e0c
+        0x00021098:    e3a00000    ....    MOV      r0,#0
+        0x0002109c:    e54b0001    ..K.    STRB     r0,[r11,#-1]
+        0x000210a0:    ea000038    8...    B        0x21188 ; _ZN6Parser4atomERj + 444
+        0x000210a4:    e59d0004    ....    LDR      r0,[sp,#4]
+        0x000210a8:    e5900000    ....    LDR      r0,[r0,#0]
+        0x000210ac:    ebfffdac    ....    BL       _ZN5Lexer4nextEv ; 0x20764
+        0x000210b0:    e3a00001    ....    MOV      r0,#1
+        0x000210b4:    e54b0001    ..K.    STRB     r0,[r11,#-1]
+        0x000210b8:    ea000032    2...    B        0x21188 ; _ZN6Parser4atomERj + 444
+        0x000210bc:    e59d0004    ....    LDR      r0,[sp,#4]
+        0x000210c0:    e5900000    ....    LDR      r0,[r0,#0]
+        0x000210c4:    e590000c    ....    LDR      r0,[r0,#0xc]
+        0x000210c8:    e350002b    +.P.    CMP      r0,#0x2b
+        0x000210cc:    0a000006    ....    BEQ      0x210ec ; _ZN6Parser4atomERj + 288
+        0x000210d0:    eaffffff    ....    B        0x210d4 ; _ZN6Parser4atomERj + 264
+        0x000210d4:    e59d0004    ....    LDR      r0,[sp,#4]
+        0x000210d8:    e5900000    ....    LDR      r0,[r0,#0]
+        0x000210dc:    e590000c    ....    LDR      r0,[r0,#0xc]
+        0x000210e0:    e350002d    -.P.    CMP      r0,#0x2d
+        0x000210e4:    1a000020     ...    BNE      0x2116c ; _ZN6Parser4atomERj + 416
+        0x000210e8:    eaffffff    ....    B        0x210ec ; _ZN6Parser4atomERj + 288
+        0x000210ec:    e59d0004    ....    LDR      r0,[sp,#4]
+        0x000210f0:    e3a01001    ....    MOV      r1,#1
+        0x000210f4:    e58d1008    ....    STR      r1,[sp,#8]
+        0x000210f8:    e5900000    ....    LDR      r0,[r0,#0]
+        0x000210fc:    e590000c    ....    LDR      r0,[r0,#0xc]
+        0x00021100:    e350002d    -.P.    CMP      r0,#0x2d
+        0x00021104:    1a000004    ....    BNE      0x2111c ; _ZN6Parser4atomERj + 336
+        0x00021108:    eaffffff    ....    B        0x2110c ; _ZN6Parser4atomERj + 320
+        0x0002110c:    e59d0008    ....    LDR      r0,[sp,#8]
+        0x00021110:    e2600000    ..`.    RSB      r0,r0,#0
+        0x00021114:    e58d0008    ....    STR      r0,[sp,#8]
+        0x00021118:    eaffffff    ....    B        0x2111c ; _ZN6Parser4atomERj + 336
+        0x0002111c:    e59d0004    ....    LDR      r0,[sp,#4]
+        0x00021120:    e5900000    ....    LDR      r0,[r0,#0]
+        0x00021124:    ebfffd8e    ....    BL       _ZN5Lexer4nextEv ; 0x20764
+        0x00021128:    e59d0004    ....    LDR      r0,[sp,#4]
+        0x0002112c:    e59d100c    ....    LDR      r1,[sp,#0xc]
+        0x00021130:    ebffffa5    ....    BL       _ZN6Parser4atomERj ; 0x20fcc
+        0x00021134:    e3500000    ..P.    CMP      r0,#0
+        0x00021138:    1a000003    ....    BNE      0x2114c ; _ZN6Parser4atomERj + 384
+        0x0002113c:    eaffffff    ....    B        0x21140 ; _ZN6Parser4atomERj + 372
+        0x00021140:    e3a00000    ....    MOV      r0,#0
+        0x00021144:    e54b0001    ..K.    STRB     r0,[r11,#-1]
+        0x00021148:    ea00000e    ....    B        0x21188 ; _ZN6Parser4atomERj + 444
+        0x0002114c:    e59d2008    . ..    LDR      r2,[sp,#8]
+        0x00021150:    e59d100c    ....    LDR      r1,[sp,#0xc]
+        0x00021154:    e5910000    ....    LDR      r0,[r1,#0]
+        0x00021158:    e0000290    ....    MUL      r0,r0,r2
+        0x0002115c:    e5810000    ....    STR      r0,[r1,#0]
+        0x00021160:    e3a00001    ....    MOV      r0,#1
+        0x00021164:    e54b0001    ..K.    STRB     r0,[r11,#-1]
+        0x00021168:    ea000006    ....    B        0x21188 ; _ZN6Parser4atomERj + 444
+        0x0002116c:    e59d0004    ....    LDR      r0,[sp,#4]
+        0x00021170:    e3001109    ....    MOV      r1,#0x109
+        0x00021174:    e3401001    ..@.    MOVT     r1,#1
+        0x00021178:    ebffff23    #...    BL       _ZN6Parser5errorEPKc ; 0x20e0c
+        0x0002117c:    e3a00000    ....    MOV      r0,#0
+        0x00021180:    e54b0001    ..K.    STRB     r0,[r11,#-1]
+        0x00021184:    eaffffff    ....    B        0x21188 ; _ZN6Parser4atomERj + 444
+        0x00021188:    e55b0001    ..[.    LDRB     r0,[r11,#-1]
+        0x0002118c:    e1a0d00b    ....    MOV      sp,r11
+        0x00021190:    e8bd8800    ....    POP      {r11,pc}
+
+** Section #4 '.ARM.attributes' (SHT_ARM_ATTRIBUTES)
+    Size   : 30 bytes
+
+
+** Section #5 '.comment' (SHT_PROGBITS) [SHF_MERGE + SHF_STRINGS]
+    Size   : 209 bytes
+
+
+** Section #6 '.symtab' (SHT_SYMTAB)
+    Size   : 976 bytes (alignment 4)
+    String table #8 '.strtab'
+    Last local symbol no. 20
+
+
+** Section #7 '.shstrtab' (SHT_STRTAB)
+    Size   : 77 bytes
+
+
+** Section #8 '.strtab' (SHT_STRTAB)
+    Size   : 690 bytes
+
+
